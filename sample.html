@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History API Demo</title>
+</head>
+<body>
+  <h1>History API Demo with State Object</h1>
+  <button id="page1">Go to Page 1</button>
+  <button id="page2">Go to Page 2</button>
+  <button id="page3">Go to Page 3</button>
+  <div id="content">Welcome to the demo!</div>
+
+  <script>
+    // Function to update content and history
+    function navigateToPage(pageNumber) {
+      // Custom state object
+      const state = { page: pageNumber };
+      const title = `Page ${pageNumber}`;
+      const url = `/page${pageNumber}`;
+
+      // Add new state to the history stack
+      history.pushState(state, title, url);
+
+      // Update the content dynamically
+      document.getElementById("content").textContent = `You are on ${title}`;
+    }
+
+    // Event listeners for buttons
+    document.getElementById("page1").addEventListener("click", () => navigateToPage(1));
+    document.getElementById("page2").addEventListener("click", () => navigateToPage(2));
+    document.getElementById("page3").addEventListener("click", () => navigateToPage(3));
+
+    // Handle back/forward navigation
+    window.addEventListener("popstate", (event) => {
+      const state = event.state;
+      if (state && state.page) 
+    {
+        // Restore the content based on the state object
+        document.getElementById("content").textContent = `You are on Page ${state.page}`;
+      } else 
+      {
+        // Default content for initial load
+        document.getElementById("content").textContent = "Welcome to the demo!";
+      }
+    }
+    );
+
+    window.addEventListener("DOMContentLoaded",()=>{
+  console.log("sneka`")
+    }
+
+    
+  )
+  
+  </script>
+</body>
+</html>
